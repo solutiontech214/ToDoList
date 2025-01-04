@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="./css/style.css">    
+</head>
+<body>
+    <div class="container">
+        <div style="position:static;" >
+            <div CLASS="heading" >
+                <h1> To-Do List </h1><img src="https://img.icons8.com/ios/452/todo-list.png" alt="To-Do List">
+            </div>
+            <div  class="input-box">
+                <input type="text" placeholder="Enter your task "> 
+                <button onclick="addTask()"> Add Task </button>
+            </div>
+        </div>
+       
+        <div class="list-container">
+            <ul id="list">
+               <!-- <li class="list_item"> <input class="checker" type="checkbox" onclick="completedTask()"><p class="task"> </p> <button>Remove Task </button> </li> -->
+            </ul>
+        </div>
+    </div>
+    <script>
+         
+        
+         let listContainer=document.querySelector('.list-container');
+         showTask();
+        function addTask(){
+            let task = document.querySelector('input').value;
+           
+            if(task.trim()!==''){
+                let ul = document.querySelector('ul');
+                let li = document.createElement('li');
+                let input = document.createElement('input');
+                input.setAttribute('type','checkbox');
+                input.setAttribute('class','checker');
+                input.setAttribute('onclick','completedTask()');
+                let p = document.createElement('p');
+                p.setAttribute('class','task');
+                p.innerText = task;
+                p.style.overflow='auto';
+                let button = document.createElement('button');
+                button.innerText = 'Remove Task';
+                button.setAttribute('onclick','removeTask()');
+                li.appendChild(input);
+                li.appendChild(p);
+                li.appendChild(button);
+                ul.appendChild(li);
+                document.querySelector('input').value = '';
+            saveTask();
+        }
+    }
+        function completedTask(){
+            if(document.querySelector('.checker').checked==true){
+                document.querySelector('.task').style.textDecoration = "line-through";
+        }else{
+            document.querySelector('.task').style.textDecoration = "none";
+        }
+        saveTask();
+    }
+function removeTask(){
+    let li = document.querySelector('li');
+    li.remove();
+}
+function saveTask(){
+    localStorage.setItem('task',listContainer.innerHTML);
+}
+function showTask(){
+    listContainer.innerHTML = localStorage.getItem('task');
+}
+    </script>
+</body>
+</html>
