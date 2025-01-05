@@ -4,14 +4,16 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Montserrat", serif;
-    background: linear-gradient(135deg, #6f5f4f, #0a0310);
     font-size: 15px;
 }
 
 body {
-   
+    background: linear-gradient(135deg, #6f5f4f, #0a0310);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size:auto;
+   
+    width: 100%;
+    height: 100vh;
 }
 
 .container {
