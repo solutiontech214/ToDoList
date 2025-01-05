@@ -11,14 +11,18 @@ function addTask() {
             let input = document.createElement('input');
             input.setAttribute('type', 'checkbox');
             input.setAttribute('class', 'checker');
-            input.setAttribute('onclick', 'completedTask(this)');
+            input.addEventListener('click', function() {
+                completedTask(this);
+            });
             let p = document.createElement('p');
             p.setAttribute('class', 'task');
             p.innerText = task;
             p.style.overflow = 'auto';
             let button = document.createElement('button');
             button.innerText = 'Remove Task';
-            button.setAttribute('onclick', 'removeTask(this)');
+            button.addEventListener('click', function() {
+                removeTask(this);
+            });
             li.appendChild(input);
             li.appendChild(p);
             li.appendChild(button);
@@ -33,18 +37,26 @@ function addTask() {
 
 function completedTask(checkbox) {
     let task = checkbox.nextElementSibling;
-    if (checkbox.checked) {
-        task.style.textDecoration = "line-through";
+    if (task && task.classList.contains('task')) {
+        if (checkbox.checked) {
+            task.style.textDecoration = "line-through";
+        } else {
+            task.style.textDecoration = "none";
+        }
+        saveTask();
     } else {
-        task.style.textDecoration = "none";
+        console.error('The task element was not found.');
     }
-    saveTask();
 }
 
 function removeTask(button) {
     let li = button.parentElement;
-    li.remove();
-    saveTask();
+    if (li && li.tagName === 'LI') {
+        li.remove();
+        saveTask();
+    } else {
+        console.error('The li element was not found.');
+    }
 }
 
 function saveTask() {
