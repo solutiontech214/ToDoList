@@ -8,10 +8,11 @@
 }
 
 body {
-    background: linear-gradient(135deg, #6f5f4f, #0a0310);
+    background: linear-gradient(135deg, #76685b, #040007);
     background-repeat: no-repeat;
     background-size:auto;
-   
+   width: 100%;
+   height: 100vh;
    
 }
 
